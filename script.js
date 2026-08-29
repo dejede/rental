@@ -148,3 +148,136 @@ function closeModal() {
     const modal = document.getElementById('imageModal');
     modal.style.display = 'none';
 }
+
+function generateNotaPDF() {
+    const unit = document.getElementById('unitPilihanHidden').value;
+    const nama = document.getElementById('namaPenyewa').value;
+    const durasi = document.getElementById('durasi').value || 1;
+    const jaminan = document.getElementById('jaminan').value || '-';
+
+    if (!unit || keranjang.length === 0) {
+        alert('Silakan pilih minimal 1 unit dari katalog dan isi formulir pemesanan terlebih dahulu!');
+        return;
+    }
+
+    if (!nama) {
+        alert('Silakan isi Nama Lengkap penyewa terlebih dahulu!');
+        document.getElementById('namaPenyewa').focus();
+        return;
+    }
+
+    const today = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    document.getElementById('notaTanggal').innerText = today;
+    document.getElementById('notaNamaPenyewa').innerText = nama;
+    document.getElementById('notaJaminan').innerText = jaminan;
+    document.getElementById('notaDurasi').innerText = durasi;
+    document.getElementById('sigPenyewa').innerText = nama;
+
+    const tbody = document.getElementById('notaTableBody');
+    tbody.innerHTML = '';
+
+    let totalSemua = 0;
+    keranjang.forEach((item, index) => {
+        const subtotal = item.harga * item.jumlah * parseInt(durasi);
+        totalSemua += subtotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td style="text-align: center;">${index + 1}</td>
+            <td style="text-align: center;">${item.jumlah * parseInt(durasi)} Hari</td>
+            <td>${item.nama}</td>
+            <td>Rp ${item.harga.toLocaleString('id-ID')}</td>
+            <td>Rp ${subtotal.toLocaleString('id-ID')}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    for (let i = keranjang.length; i < 4; i++) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td style="text-align: center; color: transparent;">${i + 1}</td>
+            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+        `;
+        tbody.appendChild(row);
+    }
+
+    document.getElementById('notaGrandTotal').innerText = 'Rp ' + totalSemua.toLocaleString('id-ID');
+    document.getElementById('notaModal').style.display = 'flex';
+}
+
+function closeNotaModal() {
+    document.getElementById('notaModal').style.display = 'none';
+}
+
+function printNotaPDF() {
+    const printContents = document.getElementById('notaPrintArea').innerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Nota Pembayaran - Dejede Rental</title>
+            <style>
+                body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; color: #000; }
+                .nota-sheet { background: #ffffff; padding: 20px; border: 2px solid #000; max-width: 700px; margin: 0 auto; }
+                .nota-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+                .nota-brand-info h2 { font-size: 22px; font-weight: 900; margin: 0 0 2px 0; }
+                .nota-brand-info p { font-size: 11px; color: #555; margin-bottom: 8px; }
+                .nota-badge { background: #000; color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 10px; display: inline-block; font-weight: 600; }
+                .nota-meta { text-align: right; font-size: 12px; line-height: 1.4; }
+                .nota-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+                .nota-table th, .nota-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; }
+                .nota-table th { background: #f2f2f2; font-size: 11px; font-weight: bold; text-align: center; }
+                .nota-footer-section { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 15px; gap: 15px; }
+                .nota-warning { border: 1.5px solid #000; padding: 8px 10px; width: 50%; font-size: 10px; }
+                .nota-signatures { display: flex; gap: 20px; width: 50%; justify-content: flex-end; text-align: center; font-size: 11px; }
+                .sig-box { width: 110px; }
+                .nota-bottom-note { text-align: center; font-size: 10.5px; font-weight: bold; margin-top: 20px; border-top: 1px dashed #000; padding-top: 8px; }
+            </style>
+        </head>
+        <body>
+            <div class="nota-sheet">${printContents}</div>
+            <script>window.onload = function() { window.print(); window.close(); };<\/script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+async function downloadNotaJPEG() {
+    const element = document.getElementById('notaPrintArea');
+    if (!element) return;
+    
+    const modal = document.getElementById('notaModal');
+    const wasHidden = modal.style.display !== 'flex';
+    if (wasHidden) {
+        modal.style.display = 'flex';
+    }
+
+    try {
+        // Beri waktu render DOM & pastikan gambar termuat
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: '#ffffff'
+        });
+        
+        const image = canvas.toDataURL('image/jpeg', 0.95);
+        const link = document.createElement('a');
+        
+        const namaPenyewa = document.getElementById('notaNamaPenyewa')?.innerText || 'Rental';
+        link.download = `Nota-Dejede-${namaPenyewa.replace(/[^a-zA-Z0-9]/g, '_')}.jpg`;
+        link.href = image;
+        link.click();
+    } catch (error) {
+        console.error('Gagal mendownload JPEG:', error);
+        alert('Gagal mengunduh JPEG. Pastikan file logo di folder assets dapat diakses.');
+    } finally {
+        if (wasHidden) {
+            modal.style.display = 'none';
+        }
+    }
+}
