@@ -255,14 +255,30 @@ async function downloadNotaJPEG() {
     }
 
     try {
-        // Beri waktu render DOM & pastikan gambar termuat
         await new Promise(resolve => setTimeout(resolve, 200));
 
         const canvas = await html2canvas(element, {
             scale: 2,
             useCORS: true,
-            allowTaint: false,
-            backgroundColor: '#ffffff'
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            onclone: async function(clonedDoc) {
+                const clonedImg = clonedDoc.querySelector('#notaPrintArea img');
+                if (clonedImg) {
+                    try {
+                        const response = await fetch('https://raw.githubusercontent.com/dejede/rental/main/assets/logo.png');
+                        const blob = await response.blob();
+                        const base64data = await new Promise((resolve) => {
+                            const reader = new FileReader();
+                            reader.onloadend = () => resolve(reader.result);
+                            reader.readAsDataURL(blob);
+                        });
+                        clonedImg.src = base64data;
+                    } catch (e) {
+                        console.error('Gagal memuat logo eksternal:', e);
+                    }
+                }
+            }
         });
         
         const image = canvas.toDataURL('image/jpeg', 0.95);
@@ -274,7 +290,7 @@ async function downloadNotaJPEG() {
         link.click();
     } catch (error) {
         console.error('Gagal mendownload JPEG:', error);
-        alert('Gagal mengunduh JPEG. Pastikan file logo di folder assets dapat diakses.');
+        alert('Gagal mengunduh JPEG.');
     } finally {
         if (wasHidden) {
             modal.style.display = 'none';
