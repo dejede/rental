@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dejede Rental - Sewa Kamera, Lensa & iPhone Harian</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="header-brand">
+                <img src="assets/logo.png" alt="Dejede Rental Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>Dejede Rental & Equipment</h1>
+                    <p>Penyewaan Kamera, Lensa & iPhone Harian Terpercaya</p>
+                </div>
+            </div>
+            <!-- Navigasi Modern -->
+            <nav class="nav-menu">
+                <button class="nav-btn active" onclick="switchPage('home', event)">Home</button>
+                <button class="nav-btn" onclick="switchPage('peraturan', event)">Peraturan</button>
+                <button class="nav-btn" onclick="switchPage('about', event)">About</button>
+            </nav>
+        </div>
+    </header>
+
+<main class="main-layout">
+    <!-- Halaman Utama (Home) -->
+    <div id="page-home" class="page-content active-page">
+        <section class="catalog-area">
+            <div class="catalog-category">
+                <h2>Katalog Kamera</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="assets/canon-eos-m.png" alt="Canon EOS M" class="product-img">
+                        <h3>Canon EOS M (BO)</h3>
+                        <p class="price">Rp 120.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Canon EOS M', 120000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/canon-eos-rp.png" alt="Canon EOS RP" class="product-img">
+                        <h3>Canon EOS RP (BO)</h3>
+                        <p class="price">Rp 300.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Canon EOS RP', 300000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/canon-eos-m50.png" alt="Canon EOS M50" class="product-img">
+                        <h3>Canon EOS M50 (BO)</h3>
+                        <p class="price">Rp 175.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Canon EOS M50', 175000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/canon-550d.png" alt="Canon 550D + Lensa Kit" class="product-img">
+                        <h3>Canon 550D + Lensa Kit</h3>
+                        <p class="price">Rp 150.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Canon EOS 550D + Lensa Kit', 150000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/fujifilm-xa3.png" alt="Fujifilm X-A3 + Lensa Kit" class="product-img">
+                        <h3>Fujifilm X-A3 + Lensa Kit</h3>
+                        <p class="price">Rp 150.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Fujifilm X-A3', 150000)">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-category">
+                <h2>Katalog Lensa</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="assets/sigma-16mm.png" alt="Sigma 16mm ART" class="product-img">
+                        <h3>Sigma 16mm ART</h3>
+                        <p class="price">Rp 90.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Lensa Sigma 16mm f/1.4 ART', 90000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/sigma-30mm.png" alt="Sigma 30mm ART" class="product-img">
+                        <h3>Sigma 30mm ART</h3>
+                        <p class="price">Rp 90.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Lensa Sigma 30mm f/1.4 ART', 90000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/sigma-35mm.png" alt="Sigma 35mm ART" class="product-img">
+                        <h3>Sigma 35mm ART</h3>
+                        <p class="price">Rp 120.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Lensa Sigma 35mm f/1.4 ART', 120000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/sigma-85mm.png" alt="Sigma 85mm ART" class="product-img">
+                        <h3>Sigma 85mm ART</h3>
+                        <p class="price">Rp 150.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('Lensa Sigma 85mm f/1.4 ART', 150000)">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-category">
+                <h2>Katalog iPhone</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="assets/iphone-11pro.png" alt="iPhone 11 Pro" class="product-img">
+                        <h3>iPhone 11 Pro</h3>
+                        <p class="price">Rp 100.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('iPhone 11 Pro', 120000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/iphone-13.png" alt="iPhone 13" class="product-img">
+                        <h3>iPhone 13</h3>
+                        <p class="price">Rp 130.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('iPhone 13', 150000)">Tambah</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="assets/iphone-15.png" alt="iPhone 15" class="product-img">
+                        <h3>iPhone 15</h3>
+                        <p class="price">Rp 200.000 / hari</p>
+                        <button onclick="tambahKeKeranjang('iPhone 15', 200000)">Tambah</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            <aside class="booking-sidebar">
+                <div class="booking-sticky">
+                    <h2>Formulir Pemesanan</h2>
+                    <form id="bookingForm" onsubmit="kirimKeWhatsApp(event)">
+                        <div class="form-group">
+                            <label>Unit Dipilih:</label>
+                            <div id="listKeranjang" class="cart-box">
+                                <p class="cart-placeholder">Belum ada unit dipilih.</p>
+                            </div>
+                            <input type="hidden" id="unitPilihanHidden" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="namaPenyewa">Nama Lengkap</label>
+                            <input type="text" id="namaPenyewa" required placeholder="Sesuai KTP">
+                        </div>
+                        <div class="form-group">
+                            <label for="waPenyewa">Nomor WhatsApp</label>
+                            <input type="tel" id="waPenyewa" required placeholder="08xxxxxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label for="durasi">Durasi (Hari)</label>
+                            <input type="number" id="durasi" min="1" value="1" required oninput="hitungTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label for="jaminan">Jaminan Asli</label>
+                            <select id="jaminan" required>
+                                <option value="">-- Pilih Jaminan --</option>
+                                <option value="KTP Asli">KTP Asli</option>
+                                <option value="SIM Asli">SIM Asli</option>
+                                <option value="Paspor / KITAS">Paspor / KITAS</option>
+                            </select>
+                        </div>
+                        <div class="form-group total-group">
+                            <p>Total: <span id="totalBiaya">Rp 0</span></p>
+                        </div>
+                        <button type="submit" class="btn-submit">Kirim ke WhatsApp</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+
+<!-- Halaman Peraturan -->
+        <div id="page-peraturan" class="page-content">
+            <div class="info-card">
+                <h2>Peraturan & Ketentuan Sewa</h2>
+                <ul class="rule-list">
+                    <li>Penyewa wajib meninggalkan jaminan identitas asli yang masih berlaku (KTP/SIM/Paspor).</li>
+                    <li>Durasi sewa dihitung per 24 jam terhitung sejak waktu pengambilan barang.</li>
+                    <li>Keterlambatan pengembalian akan dikenakan denda sebesar 5% dari total harga sewa barang per jamnya.</li>
+                    <li>Segala bentuk kerusakan atau kehilangan unit selama masa sewa sepenuhnya menjadi tanggung jawab penyewa.</li>
+                    <li>Pengecekan kondisi fisik unit wajib dilakukan bersama pada saat proses serah terima (pickup & return).</li>
+                </ul>
+            </div>
+
+            <div class="info-card" style="margin-top: 20px;">
+                <h2>Simulasi Perhitungan Denda Keterlambatan</h2>
+                <div class="form-group">
+                    <label for="totalSewa">Total Harga Sewa (Rp)</label>
+                    <input type="number" id="totalSewa" placeholder="Contoh: 150000" oninput="hitungDendaOtomatis()">
+                </div>
+                <div class="form-group">
+                    <label for="jamTerlambat">Keterlambatan (Jam)</label>
+                    <input type="number" id="jamTerlambat" placeholder="Contoh: 3" oninput="hitungDendaOtomatis()">
+                </div>
+                <div class="form-group total-group">
+                    <p>Estimasi Denda (5% / jam): <span id="hasilDenda">Rp 0</span></p>
+                </div>
+            </div>
+        </div>
+
+<!-- Halaman About -->
+        <div id="page-about" class="page-content">
+            <div class="info-card">
+                <h2>Tentang Dejede Rental & Equipment</h2>
+                <p><strong>Dejede Rental & Equipment</strong> adalah penyedia layanan jasa sewa kamera DSLR, Mirrorless, Lensa profesional, serta perangkat iPhone harian terpercaya dengan harga bersahabat dan kualitas unit yang selalu terjaga prima.</p>
+                <br>
+                <p>Selain penyewaan alat multimedia, <strong>Dejede</strong> juga merupakan studio profesional <strong>Wedding Photo & Video</strong> yang berbasis di Lumajang.</p>
+                
+                <!-- Blok Layanan Lainnya -->
+                <div class="services-container">
+                    <h3 class="services-title">Layanan & Unit Utama Kami</h3>
+                    <div class="services-grid">
+                        <div class="service-box">
+                            <span class="service-icon">📷</span>
+                            <h4>Sewa Kamera & Lensa</h4>
+                            <p>DSLR & Mirrorless harian lengkap beserta pilihan lensa fix/zoom berkualitas.</p>
+                        </div>
+                        <div class="service-box">
+                            <span class="service-icon">📱</span>
+                            <h4>Sewa iPhone Harian</h4>
+                            <p>Pilihan seri iPhone terbaik untuk kebutuhan konten, event, dan liburan.</p>
+                        </div>
+                        <div class="service-box">
+                            <span class="service-icon">🎬</span>
+                            <h4>Wedding Photo & Video</h4>
+                            <p>Dokumentasi profesional pernikahan, prewedding, dan event spesial Anda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="address-box">
+                    <p><strong>📍 Alamat Lengkap:</strong><br>
+                    Utara Pasar Mbuyeng, Desa Purorejo, Kecamatan Tempursari, Kabupaten Lumajang.</p>
+                </div>
+                
+                <p class="about-footer-text">Kami hadir untuk mendukung kebutuhan dokumentasi acara, liburan, maupun project multimedia kreatif Anda dengan prosedur pemesanan yang mudah, cepat, dan aman.</p>
+            </div>
+        </div>
+
+    <footer>
+        <p>&copy; 2026 Dejede Rental Kamera & iPhone. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
