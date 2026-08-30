@@ -160,6 +160,13 @@
                         <button type="submit" class="btn-submit">
 							<img src="assets/wa-icon.svg" alt="WhatsApp Icon" class="btn-wa-icon"> Kirim ke WhatsApp
 						</button>
+						<!-- Tombol Aksi Nota Pembayaran (Save to PDF & HTML to Save) -->
+						<div class="nota-btn-group">
+						<button type="button" class="btn-nota btn-prev" onclick="generateNotaPDF()">
+						<span>📄</span> Nota Preview
+						</button>
+			</div>
+</div>
                     </form>
                 </div>
 				
@@ -235,19 +242,9 @@
         </div>
     </div>
 </div>
-
-<!-- Tombol Aksi Nota Pembayaran (Save to PDF & HTML to Save) -->
-<div class="nota-action-container" style="margin-top: 25px;">
-    <h2>Nota Pembayaran</h2>
-    <div class="nota-btn-group">
-        <button type="button" class="btn-nota btn-pdf" onclick="generateNotaPDF()">
-            <span>📄</span> Preview
-        </button>
-    </div>
-</div>
 				
-            </aside>
-        </div>
+</aside>
+</div>
 
 <!-- Halaman Peraturan -->
         <div id="page-peraturan" class="page-content">
